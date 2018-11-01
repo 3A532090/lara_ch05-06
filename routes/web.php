@@ -70,3 +70,15 @@ Route::group(['prefix'=>'student'],function() {
         }
     ])->where(['subject'=>'(chinese|english|math)']);
 });
+
+//使之成為路由群組'student'當中的路由，使之可串接StudentController內的getStudentData及getStudentScore函數
+Route::pattern('student_no','s[0-9]{10}');
+Route::group(['prefix'=>'student'],function() {
+    Route::get('{student_no}', [
+        'as' => 'student',
+        'uses' => 'StudentController@getStudentData']);
+
+    Route::get('{student_no}/score/{subject?}',[
+        'as'=>'student.score',
+        'uses'=>'StudentController@getStudentScore'])->where(['subject'=>'(chinese|english|math)']);
+});
