@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','HomeController@index');
+
 
 /*基礎路由參數*/
 Route::get('student/{student_no}',function ($student_no){
